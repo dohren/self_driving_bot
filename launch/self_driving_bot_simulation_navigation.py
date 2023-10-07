@@ -29,9 +29,9 @@ from launch_ros.actions import Node
 def generate_launch_description():
     # Get the launch directory
     bringup_dir = get_package_share_directory('nav2_bringup')
-    launch_dir = os.path.join(bringup_dir, 'launch')
+    nav2_launch_dir = os.path.join(bringup_dir, 'launch')
 
-    rover_dir = get_package_share_directory("rover");
+    self_driving_bot_dir = get_package_share_directory("self_driving_bot");
 
     # Create the launch configuration variables
     slam = LaunchConfiguration('slam')
@@ -88,7 +88,7 @@ def generate_launch_description():
     declare_map_yaml_cmd = DeclareLaunchArgument(
         'map',
         default_value=os.path.join(
-        rover_dir, 'maps', 'test_zone.yaml'),
+        self_driving_bot_dir, 'maps', 'test_zone.yaml'),
         description='Full path to map file to load')
 
     declare_use_sim_time_cmd = DeclareLaunchArgument(
@@ -145,13 +145,12 @@ def generate_launch_description():
         #              https://github.com/ROBOTIS-GIT/turtlebot3_simulations/issues/91
         # default_value=os.path.join(get_package_share_directory('turtlebot3_gazebo'),
         # worlds/turtlebot3_worlds/waffle.model')
-        default_value=get_package_share_directory("rover") + '/worlds/test_zone.world',
-        #default_value='small_house.world',
+        default_value = self_driving_bot_dir + '/worlds/test_zone.world',
         description='Full path to world model file to load')
 
     declare_robot_name_cmd = DeclareLaunchArgument(
         'robot_name',
-        default_value='turtlebot3_waffle',
+        default_value='ikea_table',
         description='name of the robot')
 
     # Specify the actions
@@ -159,16 +158,15 @@ def generate_launch_description():
         condition=IfCondition(use_simulator),
         cmd=['gzserver', '-s', 'libgazebo_ros_init.so',
              '-s', 'libgazebo_ros_factory.so', world],
-        cwd=[launch_dir], output='screen')
+        cwd=[nav2_launch_dir], output='screen')
 
     start_gazebo_client_cmd = ExecuteProcess(
         condition=IfCondition(PythonExpression(
             [use_simulator, ' and not ', headless])),
         cmd=['gzclient'],
-        cwd=[launch_dir], output='screen')
+        cwd=[nav2_launch_dir], output='screen')
 
-    #urdf = os.path.join(bringup_dir, 'urdf', 'turtlebot3_waffle.urdf')
-    urdf = get_package_share_directory("rover") + '/urdf/table_with_rolls.urdf'
+    urdf = os.path.join(self_driving_bot_dir, 'urdf', 'ikea_table.urdf')
 
     with open(urdf, 'r') as infp:
         robot_description = infp.read()
@@ -191,11 +189,10 @@ def generate_launch_description():
             name='urdf_spawner',
             output='screen',
             arguments=['-entity', 'my_robot', '-file', urdf])
-            #arguments=["-topic", "/robot_description", "-entity", "dolly"]) 
 
     rviz_cmd = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
-            os.path.join(launch_dir, 'rviz_launch.py')),
+            os.path.join(nav2_launch_dir, 'rviz_launch.py')),
         condition=IfCondition(use_rviz),
         launch_arguments={'namespace': namespace,
                           'use_namespace': use_namespace,
@@ -203,7 +200,7 @@ def generate_launch_description():
 
     bringup_cmd = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
-            os.path.join(launch_dir, 'bringup_launch.py')),
+            os.path.join(nav2_launch_dir, 'bringup_launch.py')),
         launch_arguments={'namespace': namespace,
                           'use_namespace': use_namespace,
                           'slam': slam,

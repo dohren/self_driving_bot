@@ -102,13 +102,13 @@
    <visual>
       <origin rpy="0.0 0.0 0.0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="file:///home/andi/os2/ros2_workspace/install/self_driving_bot/share/self_driving_bot/meshes/roll.dae" scale="1 1 1"/>
+        <mesh filename="file:///home/andi/ros2/ros2_workspace/install/self_driving_bot/share/self_driving_bot/meshes/roll.dae" scale="1 1 1"/>
       </geometry>
     </visual>
     
     <collision>
       <geometry>
-        <mesh filename="file:///home/andi/os2/ros2_workspace/install/self_driving_bot/share/self_driving_bot/meshes/roll.dae" scale="1 1 1"/>
+        <mesh filename="file:///home/andi/ros2/ros2_workspace/install/self_driving_bot/share/self_driving_bot/meshes/roll.dae" scale="1 1 1"/>
      </geometry>
     </collision>
 
@@ -161,13 +161,13 @@
    <visual>
       <origin rpy="0.0 0.0 0.0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="file:///home/andi/os2/ros2_workspace/install/self_driving_bot/share/self_driving_bot/meshes/roll.dae" scale="1 1 1"/>
+        <mesh filename="file:///home/andi/ros2/ros2_workspace/install/self_driving_bot/share/self_driving_bot/meshes/roll.dae" scale="1 1 1"/>
       </geometry>
     </visual>
     
     <collision>
       <geometry>
-        <mesh filename="file:///home/andi/os2/ros2_workspace/install/self_driving_bot/share/self_driving_bot/meshes/roll.dae" scale="1 1 1"/>
+        <mesh filename="file:///home/andi/ros2/ros2_workspace/install/self_driving_bot/share/self_driving_bot/meshes/roll.dae" scale="1 1 1"/>
      </geometry>
     </collision>
 
