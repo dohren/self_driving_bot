@@ -1,0 +1,376 @@
+<?xml version="1.0" ?>
+<robot name="ikea_table">
+
+
+  <link name="base_link">
+   <visual>
+      <origin rpy="0.0 0.0 -1.57" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="file:///home/andi/ros2/ros2_workspace/install/self_driving_bot/share/self_driving_bot/meshes/ikea_table.dae" scale="1 1 1"/>
+      </geometry>
+    </visual>
+    
+    <collision>
+      <origin rpy="0.0 0.0 -1.57" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="file:///home/andi/os2/ros2_workspace/install/self_driving_bot/share/self_driving_bot/meshes/ikea_table.dae" scale="1 1 1"/>
+     </geometry>
+    </collision>
+
+    <inertial>
+      <origin xyz="0.35000000 -0.00000000 0.50000000"/>
+      <mass value="4.00000000"/>
+      <inertia ixx="0.48390286" ixy="0.00000005" ixz="-0.00091636" iyy="0.57406531" iyz="-0.00033842" izz="0.34467206"/>
+    </inertial>
+
+  </link>
+
+
+  <link name="base_footprint"/>
+
+  <joint name="base_joint" type="fixed">
+    <parent link="base_footprint"/>
+    <child link="base_link" />
+    <origin xyz="0 0 0.50" rpy="0 0 0"/>
+  </joint>
+
+  <link name="wheel_back_left">
+    <inertial>
+      <origin xyz="0.00000000 -0.00000000 -0.00000000" rpy="-1.57 0.0 0.0"/>
+      <mass value="0.25000000"/>
+      <inertia ixx="0.00027539" ixy="0.00000000" ixz="0.00000000" iyy="0.00052463" iyz="-0.00000535" izz="0.00027551"/>
+    </inertial>
+
+    <visual>
+      
+      <geometry>
+          <cylinder radius="0.0675" length="0.023"/>
+      </geometry>
+      <material name="white">
+        <color rgba="1 1 1 1"/>
+      </material>
+    </visual>
+
+    <collision>
+      <geometry>
+          <cylinder radius="0.0675" length="0.023"/>
+      </geometry>
+      <contact_coefficients mu="1" kp="1e+13" kd="1.0"/>
+    </collision>
+  </link>
+
+  <joint name="wheel_back_left_joint" type="continuous">
+    <origin xyz="-0.0 0.29 0.0" rpy="0.0 -1.57 -1.57"/>
+    <parent link="base_link"/>
+    <child link="wheel_back_left"/>
+    <axis xyz="0.0 0.0 1.0"/>
+  </joint>
+
+  <link name="wheel_back_right">
+    <inertial>
+      <origin xyz="0.00000000 -0.00000000 -0.00000000" rpy="-1.57 0.0 0.0"/>
+      <mass value="0.25000000"/>
+      <inertia ixx="0.00027539" ixy="0.00000000" ixz="0.00000000" iyy="0.00052463" iyz="-0.00000535" izz="0.00027551"/>
+    </inertial>
+
+    <visual>
+      
+      <geometry>
+          <cylinder radius="0.0675" length="0.023"/>
+      </geometry>
+      <material name="white">
+        <color rgba="1 1 1 1"/>
+      </material>
+    </visual>
+
+    <collision>
+      <geometry>
+          <cylinder radius="0.0675" length="0.023"/>
+      </geometry>
+      <contact_coefficients mu="1" kp="1e+13" kd="1.0"/>
+    </collision>
+  </link>
+
+  <joint name="wheel_back_right_joint" type="continuous">
+    <origin xyz="0.0 -0.29 0.0" rpy="0.0 -1.57 -1.57"/>
+    <parent link="base_link"/>
+    <child link="wheel_back_right"/>
+    <axis xyz="0.0 0.0 1.0"/>
+  </joint>
+
+  <link name="roll_front_right">
+   <visual>
+      <origin rpy="0.0 0.0 0.0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="file:///home/andi/os2/ros2_workspace/install/self_driving_bot/share/self_driving_bot/meshes/roll.dae" scale="1 1 1"/>
+      </geometry>
+    </visual>
+    
+    <collision>
+      <geometry>
+        <mesh filename="file:///home/andi/os2/ros2_workspace/install/self_driving_bot/share/self_driving_bot/meshes/roll.dae" scale="1 1 1"/>
+     </geometry>
+    </collision>
+
+    <inertial>
+      <origin xyz="-0.00000000 0.00688662 -0.02194443"/>
+      <mass value="0.20000000"/>
+      <inertia ixx="0.00006659" ixy="-0.00000000" ixz="0.00000000" iyy="0.00007293" iyz="0.00000796" izz="0.00008837"/>
+    </inertial>
+
+  </link>
+
+  <joint name="roll_front_right_joint" type="continuous">
+    <origin xyz="0.68 -0.24 0.0" rpy="0.0 0.0 0.0"/>
+    <parent link="base_link"/>
+    <child link="roll_front_right"/>
+    <axis xyz="0.0 0.0 1.0"/>
+  </joint>
+
+
+  <link name="wheel_front_right">
+    <visual>
+      <geometry>
+        <cylinder radius="0.03" length="0.03"/>
+      </geometry>
+      <material name="white"/>
+    </visual>
+
+    <inertial>
+      <origin xyz="0.00000000 0.00000000 0.00000000"/>
+      <mass value="0.10000000"/>
+      <inertia ixx="0.00000823" ixy="0.00000000" ixz="0.00000000" iyy="0.00000866" iyz="0.00000000" izz="0.00000866"/>
+    </inertial>
+
+    <collision>
+      <geometry>
+           <cylinder radius="0.03" length="0.03"/>
+      </geometry>
+      <contact_coefficients mu="1" kp="1e+13" kd="1.0"/>
+    </collision>
+  </link>
+
+  <joint name="wheel_front_right_joint" type="continuous">
+    <origin xyz="0.0 0.02 -0.040" rpy="0.0 1.57 0.0"/>
+    <parent link="roll_front_right"/>
+    <child link="wheel_front_right"/>
+    <axis xyz="0.0 0.0 1.0"/>
+  </joint>
+
+<link name="roll_front_left">
+   <visual>
+      <origin rpy="0.0 0.0 0.0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="file:///home/andi/os2/ros2_workspace/install/self_driving_bot/share/self_driving_bot/meshes/roll.dae" scale="1 1 1"/>
+      </geometry>
+    </visual>
+    
+    <collision>
+      <geometry>
+        <mesh filename="file:///home/andi/os2/ros2_workspace/install/self_driving_bot/share/self_driving_bot/meshes/roll.dae" scale="1 1 1"/>
+     </geometry>
+    </collision>
+
+    <inertial>
+      <origin xyz="-0.00000000 0.00688662 -0.02194443"/>
+      <mass value="0.20000000"/>
+      <inertia ixx="0.00006659" ixy="-0.00000000" ixz="0.00000000" iyy="0.00007293" iyz="0.00000796" izz="0.00008837"/>
+    </inertial>
+
+  </link>
+
+  <joint name="roll_front_left_joint" type="continuous">
+    <origin xyz="0.68 0.24 0.0" rpy="0.0 0.0 0.0"/>
+    <parent link="base_link"/>
+    <child link="roll_front_left"/>
+    <axis xyz="0.0 0.0 1.0"/>
+  </joint>
+
+
+  <link name="wheel_front_left">
+    <visual>
+      <geometry>
+        <cylinder radius="0.03" length="0.03"/>
+      </geometry>
+      <material name="white"/>
+    </visual>
+
+    <inertial>
+      <origin xyz="0.00000000 0.00000000 0.00000000"/>
+      <mass value="0.10000000"/>
+      <inertia ixx="0.00000823" ixy="0.00000000" ixz="0.00000000" iyy="0.00000866" iyz="0.00000000" izz="0.00000866"/>
+    </inertial>
+
+    <collision>
+      <geometry>
+           <cylinder radius="0.03" length="0.03"/>
+      </geometry>
+      <contact_coefficients mu="1" kp="1e+13" kd="1.0"/>
+    </collision>
+
+  </link>
+
+  <joint name="wheel_front_left_joint" type="continuous">
+    <origin xyz="-0.0 0.02 -0.040" rpy="0.0 1.57 0.0"/>
+    <parent link="roll_front_left"/>
+    <child link="wheel_front_left"/>
+    <axis xyz="0.0 0.0 1.0"/>
+  </joint>
+
+  <link name="camera">
+    <inertial>
+            <mass value="0.01" />
+            <inertia ixx="0.01" ixy="0.0" ixz="0" 
+            iyy="0.01" iyz="0" izz="0.01" />
+    </inertial>
+
+    <visual>
+      
+      <geometry>
+        <box size="0.005 0.03 0.03"/>
+      </geometry>
+      <material name="blue">
+        <color rgba="0 0 1 1"/>
+      </material>
+    </visual>
+
+    <collision>
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 1.57"/>
+      <geometry>
+          <box size="0.03 0.005 0.03"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="camera_joint" type="fixed">
+    <origin xyz="0.68 0.0175 0.433" rpy="0 0.0 0.0"/>
+    <parent link="base_link"/>
+    <child link="camera"/>
+    <axis xyz="0.0 0.0 1.0"/>
+
+  </joint>
+
+  <link name="lidar">
+    <inertial>
+            <mass value="0.1" />
+            <inertia ixx="0.01" ixy="0.0" ixz="0" 
+            iyy="0.01" iyz="0" izz="0.01" />
+    </inertial>
+
+    <visual>
+      <geometry>
+        <cylinder radius="0.065" length="0.02"/>
+      </geometry>
+      <material name="red">        
+          <color rgba="1 0 0 1"/>
+      </material>
+    </visual>
+
+    <collision>
+      <geometry>
+        <cylinder radius="0.065" length="0.02"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="lidar_joint" type="fixed">
+    <origin xyz="0.34 0.0 0.305" rpy="0.0 0.0 0.0"/>
+    <parent link="base_link"/>
+    <child link="lidar"/>
+    <axis xyz="0.0 0.0 1.0"/>
+  </joint>
+
+   <!-- DIFFENERNTIAL DRIVE-->
+  <gazebo>
+    <plugin name='diff_drive' filename='libgazebo_ros_diff_drive.so'>
+            <left_joint>wheel_back_left_joint</left_joint>
+            <right_joint>wheel_back_right_joint</right_joint>
+            <wheel_separation>0.575</wheel_separation>
+            <wheel_diameter>0.13</wheel_diameter>
+            <max_wheel_torque>20</max_wheel_torque>
+            <max_wheel_acceleration>1.0</max_wheel_acceleration>]
+            <publish_odom>true</publish_odom>
+            <publish_odom_tf>true</publish_odom_tf>
+            <publish_wheel_tf>true</publish_wheel_tf>
+
+            <odometry_frame>odom</odometry_frame>
+            <robot_base_frame>base_footprint</robot_base_frame>
+
+          </plugin>
+    </gazebo>
+
+    <!-- CAMERA-->
+    <gazebo reference="camera">
+      <sensor type="camera" name="camera1">
+        <update_rate>30.0</update_rate>
+        <camera name="head">
+          <horizontal_fov>1.3962634</horizontal_fov>
+          <image>
+            <width>800</width>
+            <height>800</height>
+            <format>R8G8B8</format>
+          </image>
+          <clip>
+            <near>0.02</near>
+            <far>300</far>
+          </clip>
+          <noise>
+            <type>gaussian</type>
+            <mean>0.0</mean>
+            <stddev>0.007</stddev>
+          </noise>
+        </camera>
+        <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+          <alwaysOn>true</alwaysOn>
+          <!-- updateRate>0.0</updateRate-->
+          <cameraName>/camera</cameraName>
+          <imageTopicName>image_raw</imageTopicName>
+          <cameraInfoTopicName>camera_info</cameraInfoTopicName>
+          <frameName>camera</frameName>
+          <hackBaseline>0.07</hackBaseline>
+        </plugin>
+      </sensor>
+      <material>Gazebo/Blue</material>
+  </gazebo>
+
+
+  <!-- LIDAR -->
+   <gazebo reference="lidar">
+    <sensor name="gazebo_lidar" type="ray">
+      <visualize>true</visualize>
+      <update_rate>12.0</update_rate>
+      <plugin filename="libgazebo_ros_ray_sensor.so" name="gazebo_lidar">
+        <ros>
+          <remapping>~/out:=scan</remapping>
+        </ros>
+      
+        <output_type>sensor_msgs/LaserScan</output_type>
+        <frame_name>lidar</frame_name>
+      </plugin>
+      <ray>
+        <scan>
+          <horizontal>
+            <samples>360</samples>
+            <resolution>1</resolution>
+            <min_angle>0.00</min_angle>
+            <!-- max_angle>3.14</max_angle -->
+            <max_angle>6.28</max_angle>
+          </horizontal>
+        </scan>
+        <range>
+          <min>0.50</min>
+          <max>5</max>
+          <resolution>0.015</resolution>
+        </range>
+        <noise>
+          <type>gaussian</type>
+          <mean>0.0</mean>
+          <stddev>0.01</stddev>
+        </noise>
+      </ray>
+    </sensor>
+    <material>Gazebo/DarkGrey</material>
+  </gazebo> 
+  
+
+</robot>
