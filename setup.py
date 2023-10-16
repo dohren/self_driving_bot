@@ -29,8 +29,8 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            "gamepad = rover.gamepad_publisher:main",
-            "diff_tf = rover.diff_tf:main"
+            "gamepad = self_driving_bot.gamepad_publisher:main",
+            "diff_tf = self_driving_bot.diff_tf:main"
         ],
     },
 )
