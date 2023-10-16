@@ -74,7 +74,7 @@ def generate_launch_description():
 
     declare_map_yaml_cmd = DeclareLaunchArgument(
         'map',
-        default_value=os.path.join(self_driving_bot_dir , 'maps', 'lumabit_buero.yaml'), #'Wohnung1.yaml'),
+        default_value=os.path.join(self_driving_bot_dir , 'maps', 'lumabit_buero.yaml'), 
         description='Full path to map file to load')
 
     declare_use_sim_time_cmd = DeclareLaunchArgument(
