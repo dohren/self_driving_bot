@@ -31,7 +31,7 @@ def generate_launch_description():
     bringup_dir = get_package_share_directory('nav2_bringup')
     launch_dir = os.path.join(bringup_dir, 'launch')
 
-    self_driving_bot_dir  = get_package_share_directory("self_driving_bot");
+    self_driving_bot_dir = get_package_share_directory("self_driving_bot");
 
     # Create the launch configuration variables
     slam = LaunchConfiguration('slam')
@@ -74,7 +74,7 @@ def generate_launch_description():
 
     declare_map_yaml_cmd = DeclareLaunchArgument(
         'map',
-        default_value=os.path.join(self_driving_bot_dir , 'maps', 'lumabit_buero.yaml'), 
+        default_value=os.path.join(self_driving_bot_dir, 'maps', 'lumabit_buero.yaml'), #'Wohnung1.yaml'),
         description='Full path to map file to load')
 
     declare_use_sim_time_cmd = DeclareLaunchArgument(
@@ -84,7 +84,7 @@ def generate_launch_description():
 
     declare_params_file_cmd = DeclareLaunchArgument(
         'params_file',
-        default_value=os.path.join(self_driving_bot_dir , 'params', 'self_driving_bot_params.yaml'),
+        default_value=os.path.join(self_driving_bot_dir, 'params', 'self_driving_bot_params.yaml'),
         description='Full path to the ROS2 parameters file to use for all launched nodes')
 
     declare_autostart_cmd = DeclareLaunchArgument(
@@ -146,15 +146,15 @@ def generate_launch_description():
                           'use_respawn': use_respawn}.items())
 
     start_gamepad_controller_cmd  =  Node(
-            package='self_driving_bot' ,
+            package='self_driving_bot',
             executable='gamepad',
             name='gamepad',
             output='screen')
 
 
-    start_odometry_publisher_cmd = Node(package='self_driving_bot' ,
-                    executable='diff_tf',
-                    name='diff_tf',
+    start_odometry_publisher_cmd = Node(package='self_driving_bot',
+                    executable='diff_tf_box',
+                    name='diff_tf_box',
                     )
 
 
