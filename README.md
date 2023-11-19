@@ -5,8 +5,8 @@
 This documentation provides an overview of a ROS2 package found in a specific repository designed for transforming an Ikea changing table into a self-driving robot. This innovative project takes a budget-friendly approach by utilizing an inexpensive, second-hand Ikea changing table and equipping it with essential robotic components to enable autonomous movement.
 
 
-![IKEA TABLE SIMULATION](resource/images/ikea_table_simulation.png  "IKEA table simulation")
-![IKEA TABLE PHYSICAL](resource/images/ikea_table_physical.png  "IKEA table physical")
+![IKEA TABLE SIMULATION](assets/images/ikea_table_simulation.png  "IKEA table simulation")
+![IKEA TABLE PHYSICAL](assets/images/ikea_table_physical.png  "IKEA table physical")
 
 ## Core Components and Assembly
 ### 1. Ikea Changing Table:
