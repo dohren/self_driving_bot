@@ -128,12 +128,12 @@ void subscription_callback_simple(const void *msgin) {
     // Robot is turning right
     left_speed = -200;  
     right_speed = 200;
-    interval = angular_velocity * 100 + 150;         
+    interval = angular_velocity * 100;         
   } else if (angular_velocity < -0.1) {
     // Robot is turning left 
     left_speed = 200;
     right_speed = -200;               
-    interval = -angular_velocity * 100 + 150;
+    interval = -angular_velocity * 100;
   } else if (linear_velocity > 0.1) {
     // Robot is moving forward
     left_speed = 200;  

@@ -62,20 +62,20 @@ This ROS2 package exemplifies an innovative, budget-conscious approach to autono
 | USB Cables        | Micro USB / USB C          |                          |  10,00 € |
 | Front Roller      | Micro USB / USB C          | [Amazon](https://www.amazon.de/Smart-Chassis-Motors-Encoder-Battery/dp/B01LXY7CM3)                         |  16,79 € |
 | Gamepad          | Wireless Controller         | [Amazon](https://www.amazon.de/iNNEXT-Controller-USB-Empf%C3%A4nger-Nintendo-Spiele-Unterst%C3%BCtzung/dp/B07FTCWBSY)                         |  11,50 € |
-| Total             |                            |                          | 365.23 € |
+| Total                             |          |       | 365.23 € |
 
 ### Software
 
-|                    | Software                              | 
-| :-------------:    | :-----------------------------------: | 
+|                    | Software                                                                          | 
+| :-------------:    | :-------------------------------------------------------------------------------: | 
 | Raspberry OS       | [Ubuntu for Raspberry PI](https://ubuntu.com/download/raspberry-pi/thank-you?version=22.04.3&architecture=desktop-arm64+raspi) |
-| Ros2               | [ROS2 Humble](https://docs.ros.org/en/humble/index.html)    |
-| Navigation         | [Ros2 Nav2](https://navigation.ros.org/)                    |
-| micro-ROS          | [micro-ROS](https://github.com/micro-ROS/micro_ros_arduino) |
-| Visual Studio Code | [VSCode](https://code.visualstudio.com/)                    |
-| Rufus              | [micro-ROS](https://rufus.ie/de/)                           |
-| Arduino IDE        | [Arduino IDE](https://www.arduino.cc/en/software)          |   
-| Lidar Driver       | [ldlidar_stl_ros2](https://github.com/ldrobotSensorTeam/ldlidar_stl_ros2)          |         
+| Ros2               | [ROS2 Humble](https://docs.ros.org/en/humble/index.html)                          |
+| Navigation         | [Ros2 Nav2](https://navigation.ros.org/)                                          |
+| micro-ROS          | [micro-ROS](https://github.com/micro-ROS/micro_ros_arduino)                       |
+| Visual Studio Code | [VSCode](https://code.visualstudio.com/)                                          |
+| Rufus              | [micro-ROS](https://rufus.ie/de/)                                                 |
+| Arduino IDE        | [Arduino IDE](https://www.arduino.cc/en/software)                                 |   
+| Lidar Driver       | [ldlidar_stl_ros2](https://github.com/ldrobotSensorTeam/ldlidar_stl_ros2)         |         
 
 
 
