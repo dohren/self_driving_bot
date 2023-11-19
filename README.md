@@ -39,3 +39,30 @@ The 12V DC motors, governed by the ESP32 with a motor shield, are responsible fo
 ## Conclusion
 
 This ROS2 package exemplifies an innovative, budget-conscious approach to autonomous robotics. By converting an Ikea changing table into a self-driving entity, this project demonstrates the potential for creating functional robotic systems without a significant financial investment while promoting recycling and upcycling practices in robotics development.
+
+# Robots
+
+
+## Box Robot
+
+<img src="assets/images/box_physical.jpg "  width="60%" height="30%">
+
+### Parts
+|                 | Product                               | Seller   | Price |
+| :-------------: | :-----------------------------------: | :------: | :---: |
+| Motor           | 2 x DC 12 V DIY Encoder Getriebemotor | [Amazon](https://www.amazon.de/Getriebemotor-Halterung-Magnetgetriebe-Drehzahlreduzierung-Vollmetallgetriebe/dp/B07WRYQZNR/ref=asc_df_B07WRYQZNR)                                                      |  40,39 € |
+| Micro Processor | ESP32 Dev Board | [Amazon](https://www.amazon.de/AZDelivery-NodeMCU-Development-Nachfolgermodell-ESP8266/dp/B074RGW2VQ)      |   9,99 € |
+| Mini Computer   | Raspberry Pi 4 Model B 4GB   | [Amazon](https://www.amazon.de/Raspberry-SD-Karte-Ultimatives-Quad-Core-unterst%C3%BCtzt/dp/B082PSBBMM)    | 149,99 € |
+| Lidar Sensor    | IdLidar LD19                 | [Amazon](https://www.amazon.de/InnoMaker-Extra-Small-Resistance-brushless-Navigation/dp/B09VKZ9YNT)        |  90,00 € |
+| 12v DC Akku     | Eleoption DC12300 Super-Akku | [Amazon](https://www.amazon.de/3000-mAh-dc12300-Super-wiederaufladbar-St%C3%B6psel-baterias/dp/B06ZYQPK3P) |  29,99 € |
+| 5v USB Akku     | Power Bank 26800mAh Akku     | [Amazon](https://www.amazon.de/Power-Bank-26800mAh-Externer-Akku/dp/B08FCLJ9N1) |  19,99 € |
+| Chassis         | Box                          | [laublust](https://www.laublust.de/products/holzkiste-mit-deckel-natur-unbehandelt-fsc%C2%AE-erinnerungsbox-gross-klein-aufbewahrungskiste-aus-holz-diverse-grossen) |  9,99 € |
+| Plugs             | QitinDasen 12              | [Amazon](https://www.amazon.de/QitinDasen-Verbinder-Terminalblock-M%C3%A4nnlich-Weiblich/dp/B07MF69TMX)    |   6,98 € |
+| Cables            | Breadboard jumpers         | [Amazon](https://www.amazon.de/dp/B0BRM568FM/ref=sspa_dk_detail_0) |  9,99 € |
+| USB Cables        | Micro USB / USB C          |                          |  10,00 € |
+| Front Roller      | Micro USB / USB C          | [Amazon](https://www.amazon.de/Smart-Chassis-Motors-Encoder-Battery/dp/B01LXY7CM3)                         |  11,50 € |
+| Total             |                            |                          | 348.44 € |
+
+
+
+
