@@ -60,8 +60,9 @@ This ROS2 package exemplifies an innovative, budget-conscious approach to autono
 | Plugs             | QitinDasen 12              | [Amazon](https://www.amazon.de/QitinDasen-Verbinder-Terminalblock-M%C3%A4nnlich-Weiblich/dp/B07MF69TMX)    |   6,98 € |
 | Cables            | Breadboard jumpers         | [Amazon](https://www.amazon.de/dp/B0BRM568FM/ref=sspa_dk_detail_0) |  9,99 € |
 | USB Cables        | Micro USB / USB C          |                          |  10,00 € |
-| Front Roller      | Micro USB / USB C          | [Amazon](https://www.amazon.de/Smart-Chassis-Motors-Encoder-Battery/dp/B01LXY7CM3)                         |  11,50 € |
-| Total             |                            |                          | 348.44 € |
+| Front Roller      | Micro USB / USB C          | [Amazon](https://www.amazon.de/Smart-Chassis-Motors-Encoder-Battery/dp/B01LXY7CM3)                         |  16,79 € |
+| Gamepad          | Wireless Controller         | [Amazon](https://www.amazon.de/iNNEXT-Controller-USB-Empf%C3%A4nger-Nintendo-Spiele-Unterst%C3%BCtzung/dp/B07FTCWBSY)                         |  11,50 € |
+| Total             |                            |                          | 365.23 € |
 
 ### Software
 
