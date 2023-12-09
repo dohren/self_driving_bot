@@ -31,7 +31,7 @@ def generate_launch_description():
     bringup_dir = get_package_share_directory('nav2_bringup')
     launch_dir = os.path.join(bringup_dir, 'launch')
 
-    rover_dir = get_package_share_directory("rover");
+    self_driving_bot_dir  = get_package_share_directory("self_driving_bot");
 
     # Create the launch configuration variables
     slam = LaunchConfiguration('slam')
@@ -74,7 +74,7 @@ def generate_launch_description():
 
     declare_map_yaml_cmd = DeclareLaunchArgument(
         'map',
-        default_value=os.path.join(rover_dir, 'maps', 'lumabit_buero.yaml'), #'Wohnung1.yaml'),
+        default_value=os.path.join(self_driving_bot_dir , 'maps', 'lumabit_buero.yaml'), 
         description='Full path to map file to load')
 
     declare_use_sim_time_cmd = DeclareLaunchArgument(
@@ -84,7 +84,7 @@ def generate_launch_description():
 
     declare_params_file_cmd = DeclareLaunchArgument(
         'params_file',
-        default_value=os.path.join(rover_dir, 'params', 'self_driving_table_params.yaml'),
+        default_value=os.path.join(self_driving_bot_dir , 'params', 'self_driving_bot_params.yaml'),
         description='Full path to the ROS2 parameters file to use for all launched nodes')
 
     declare_autostart_cmd = DeclareLaunchArgument(
@@ -116,7 +116,7 @@ def generate_launch_description():
         #              https://github.com/ROBOTIS-GIT/turtlebot3_simulations/issues/91
         # default_value=os.path.join(get_package_share_directory('turtlebot3_gazebo'),
         # worlds/turtlebot3_worlds/waffle.model')
-        default_value=get_package_share_directory("rover") + '/worlds/cafe.world',
+        default_value=get_package_share_directory("self_driving_bot") + '/worlds/cafe.world',
         description='Full path to world model file to load')
 
     declare_robot_name_cmd = DeclareLaunchArgument(
@@ -146,13 +146,13 @@ def generate_launch_description():
                           'use_respawn': use_respawn}.items())
 
     start_gamepad_controller_cmd  =  Node(
-            package='rover',
+            package='self_driving_bot' ,
             executable='gamepad',
             name='gamepad',
             output='screen')
 
 
-    start_odometry_publisher_cmd = Node(package='rover',
+    start_odometry_publisher_cmd = Node(package='self_driving_bot' ,
                     executable='diff_tf',
                     name='diff_tf',
                     )

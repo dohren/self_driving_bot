@@ -13,7 +13,7 @@
     <collision>
       <origin rpy="0.0 0.0 -1.57" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="file:///home/andi/os2/ros2_workspace/install/self_driving_bot/share/self_driving_bot/meshes/ikea_table.dae" scale="1 1 1"/>
+        <mesh filename="file:///home/andi/ros2/ros2_workspace/install/self_driving_bot/share/self_driving_bot/meshes/ikea_table.dae" scale="1 1 1"/>
      </geometry>
     </collision>
 
