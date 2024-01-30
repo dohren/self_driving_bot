@@ -1,0 +1,22 @@
+version: '3'
+services:
+  ros_container:
+    image: ros:humble
+    network_mode: "host"
+    devices:
+      - /dev/ttyUSB0
+    restart: unless-stopped
+    volumes:
+      - /home/andi/ros2/ros2_workspace:/root/ros_ws
+    command: bash -c "source /root/ros_ws/install/setup.bash && ros2 launch ldlidar_stl_ros2 ld19.launch.py"
+      - /dev:/dev
+  micro_ros_agent:
+    image: microros/micro-ros-agent:humble
+    devices:
+      - /dev/ttyUSB1
+    privileged: true
+    restart: unless-stopped
+    network_mode: "host"
+    volumes:
+      - /dev:/dev
+    command: serial --dev /dev/ttyUSB1 -v6
