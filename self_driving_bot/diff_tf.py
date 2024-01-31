@@ -75,7 +75,7 @@ class DiffTf(Node):
         self.create_timer(1.0/self.rate_hz, self.update)  
 
         self.ticks_meter = float(
-            self.declare_parameter('ticks_meter', 3400).value)  # The number of wheel encoder ticks per meter of travel
+            self.declare_parameter('ticks_meter', 3300).value)  # The number of wheel encoder ticks per meter of travel
         self.base_width = float(self.declare_parameter('base_width', 0.6).value)  # The wheel base width in meters
 
         self.base_frame_id = self.declare_parameter('base_frame_id',
