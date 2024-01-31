@@ -136,7 +136,7 @@ void subscription_callback_simple(const void *msgin) {
     interval = -angular_velocity * 100;
   } else if (linear_velocity > 0.1) {
     // Robot is moving forward
-    left_speed = 250;  
+    left_speed = 243;  
     right_speed = 250;
   } else if (linear_velocity < -0.1) {
     // Robot is moving backward
