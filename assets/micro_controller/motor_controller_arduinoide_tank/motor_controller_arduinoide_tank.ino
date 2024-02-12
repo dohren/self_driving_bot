@@ -21,7 +21,7 @@
   if (uxr_millis() - init > MS) { X; init = uxr_millis();} \
 } while (0)\
 
-const int r1=27,r2=26,l1=14,l2=12,speedr=25,speedl=13;
+const int l1=26,l2=27,r1=12,r2=14,speedl=25,speedr=13;
 
 rcl_subscription_t subscriber;
 rcl_publisher_t publisher_left;
@@ -137,11 +137,11 @@ void subscription_callback_simple(const void *msgin) {
   } else if (linear_velocity > 0.1) {
     // Robot is moving forward
     left_speed = 250;  
-    right_speed = 250;
+    right_speed = 236;
   } else if (linear_velocity < -0.1) {
     // Robot is moving backward
     left_speed = -250;  
-    right_speed = -250;   
+    right_speed = -236;   
   } 
 
   global_left_speed = left_speed;
@@ -153,17 +153,18 @@ void subscription_callback_simple(const void *msgin) {
 
 
 void setup() {
-  Serial.begin(115200);
-  set_microros_transports();
+  // Serial.begin(115200);
+  // set_microros_transports();
+  set_microros_wifi_transports("wlan", "password", "ipadress", 8888);
   
   //ESP32Encoder::useInternalWeakPullResistors=DOWN;
   // Enable the weak pull up resistors
   ESP32Encoder::useInternalWeakPullResistors=UP;
 
   // use pin 19 and 18 for the first encoder
-  encoder_left.attachHalfQuad(35, 34);
+  encoder_left.attachHalfQuad(32, 33);
   // use pin 17 and 16 for the second encoder
-  encoder_right.attachHalfQuad(33, 32);
+  encoder_right.attachHalfQuad(34, 35);
 
   pinMode(l1,OUTPUT);   //left motors forward
   pinMode(l2,OUTPUT);

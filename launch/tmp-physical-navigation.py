@@ -74,7 +74,7 @@ def generate_launch_description():
 
     declare_map_yaml_cmd = DeclareLaunchArgument(
         'map',
-        default_value=os.path.join(self_driving_bot_dir, 'maps', 'flat.yaml'), #'Wohnung1.yaml'),
+        default_value=os.path.join(self_driving_bot_dir, 'maps', 'Wohnung1.yaml'),
         description='Full path to map file to load')
 
     declare_use_sim_time_cmd = DeclareLaunchArgument(
@@ -153,8 +153,8 @@ def generate_launch_description():
 
 
     start_odometry_publisher_cmd = Node(package='self_driving_bot',
-                    executable='diff_tf_box',
-                    name='diff_tf_box',
+                    executable='diff_tf_tmp',
+                    name='diff_tf_tmp',
                     )
 
   # base_link to base_laser tf node

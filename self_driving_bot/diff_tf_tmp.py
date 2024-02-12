@@ -76,7 +76,7 @@ class DiffTf(Node):
 
         self.ticks_meter = float(
             self.declare_parameter('ticks_meter', 6000).value)  # The number of wheel encoder ticks per meter of travel
-        self.base_width = float(self.declare_parameter('base_width', 0.24).value)  # The wheel base width in meters
+        self.base_width = float(self.declare_parameter('base_width', .33).value)  # The wheel base width in meters
 
         self.base_frame_id = self.declare_parameter('base_frame_id',
                                                     'base_link').value  # the name of the base frame of the robot
@@ -89,33 +89,7 @@ class DiffTf(Node):
         self.encoder_low_wrap = self.declare_parameter('wheel_low_wrap', (
                 self.encoder_max - self.encoder_min) * 0.3 + self.encoder_min).value
         self.encoder_high_wrap = self.declare_parameter('wheel_high_wrap', (
-                self.encoder_max - self.---
-^Candi@andi-zen:~$ ros2 topic echo lwheel
-data: 3495
----
-data: 3495
----
-data: 3495
----
-data: 3495
----
-data: 3495
----
-data: 3495
----
-data: 3495
----
-data: 3495
----
-data: 3495
----
-data: 3495
----
-data: 3495
----
-data: 3495
----
-encoder_min) * 0.7 + self.encoder_min).value
+                self.encoder_max - self.encoder_min) * 0.7 + self.encoder_min).value
 
         # internal data
         self.enc_left = None  # wheel encoder readings

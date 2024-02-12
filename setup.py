@@ -31,7 +31,8 @@ setup(
         'console_scripts': [
             "gamepad = self_driving_bot.gamepad_publisher:main",
             "diff_tf = self_driving_bot.diff_tf:main",
-            "diff_tf_box = self_driving_bot.diff_tf_box:main"
+            "diff_tf_box = self_driving_bot.diff_tf_box:main",
+            "diff_tf_tmp = self_driving_bot.diff_tf_tmp:main"
         ],
     },
 )
