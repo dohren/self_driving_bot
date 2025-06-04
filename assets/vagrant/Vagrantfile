@@ -1,0 +1,155 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# All Vagrant configuration is done below. The "2" in Vagrant.configure
+# configures the configuration version (we support older styles for
+# backwards compatibility). Please don't change it unless you know what
+# you're doing.
+Vagrant.configure("2") do |config|
+  # The most common configuration options are documented and commented below.
+  # For a complete reference, please see the online documentation at
+  # https://docs.vagrantup.com.
+
+  # Every Vagrant development environment requires a box. You can search for
+  # boxes at https://vagrantcloud.com/search.
+  config.vm.box = "bento/ubuntu-24.04"
+  config.vm.box_version = "202502.21.0"
+  config.vm.hostname = "team-a-agent"
+  config.vm.boot_timeout = 600
+
+  # Bridged Network mit statischer IP im FritzBox-Netz
+  config.vm.network "public_network", ip: "192.168.178.101"
+
+  # Mehr Ressourcen für ROS
+  config.vm.provider "virtualbox" do |vb|
+    vb.name = "team-a-hackathon"
+    vb.memory = 8192
+    vb.cpus = 4
+    vb.gui = true
+  end
+
+  config.vm.provision "shell", inline: <<-SHELL
+    #! /usr/bin/env bash
+    #set -xe
+
+    DEBIAN_FRONTEND=noninteractive
+
+    sudo apt-mark hold grub-pc grub-pc-bin
+
+    echo "[*] System-Update und Grundpakete"
+    sudo apt update
+    sudo apt upgrade -y
+    sudo apt install -y curl wget gnupg2 lsb-release software-properties-common apt-transport-https ca-certificates build-essential
+
+    locale  # check for UTF-8
+    sudo apt update && sudo apt install locales
+    sudo locale-gen en_US en_US.UTF-8
+    sudo update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
+    export LANG=en_US.UTF-8
+
+    locale  # verify settings
+    sudo apt install software-properties-common
+    sudo sed -i '/^# deb .*universe/ s/^# //' /etc/apt/sources.list
+    sudo apt update
+
+    echo "[*] Desktop-Umgebung installieren (XFCE + LightDM)"
+    sudo  apt install -y xfce4 lightdm
+
+    # Optional: Xfce als Standard-Session setzen
+    sudo update-alternatives --set x-session-manager /usr/bin/startxfce4
+
+    # LightDM-Konfiguration für xfce
+    echo -e "[Seat:*]\nuser-session=xfce" | sudo tee /etc/lightdm/lightdm.conf
+
+    # Gasterweiterungen installieren
+    sudo apt install -y virtualbox-guest-utils virtualbox-guest-x11
+    sudo systemctl enable vboxadd --now
+
+    CODENAME=$(lsb_release -cs)
+    #ROS_APT_SOURCE_VERSION=$(curl -s https://api.github.com/repos/ros-infrastructure/ros-apt-source/releases/latest | grep -oP '"tag_name":\s*"\K(.*)(?=")')
+    ROS_APT_SOURCE_VERSION=1.1.0
+    DOWNLOAD_URL="https://github.com/ros-infrastructure/ros-apt-source/releases/download/${ROS_APT_SOURCE_VERSION}/ros2-apt-source_${ROS_APT_SOURCE_VERSION}.${CODENAME}_all.deb"
+    curl -L -o /tmp/ros2-apt-source.deb "$DOWNLOAD_URL"
+    sudo apt install -y /tmp/ros2-apt-source.deb
+
+    sudo apt update && sudo apt install -y ros-dev-tools
+    sudo apt update
+    sudo apt upgrade
+    sudo apt install -y ros-jazzy-desktop
+
+    echo "[*] ROS-Setup in .bashrc eintragen"
+    echo "source /opt/ros/jazzy/setup.bash" | sudo tee -a /home/vagrant/.bashrc
+    sudo apt-get install ros-jazzy-ros-gz
+    sudo apt install -y ros-jazzy-navigation2
+    sudo apt install -y ros-jazzy-nav2-bringup
+    sudo apt install -y ros-jazzy-nav2-minimal-tb*
+
+    # VS Code installieren
+    echo "[*] VS Code installieren"
+    wget -qO vscode.deb https://update.code.visualstudio.com/latest/linux-deb-x64/stable
+    export DISPLAY=""
+    sudo DEBIAN_FRONTEND=noninteractive dpkg --configure -a
+    sudo DEBIAN_FRONTEND=noninteractive apt install -y ./vscode.deb
+    rm vscode.deb
+
+    # Terminator installieren
+    sudo apt install -y terminator
+
+    # Arudino-IDE installieren
+    echo "[*] Arduino IDE installieren (AppImage)"
+    ARDUINO_VERSION="nightly-20250602"
+    wget -q https://downloads.arduino.cc/arduino-ide/nightly/arduino-ide_${ARDUINO_VERSION}_Linux_64bit.AppImage -O arduino-ide.AppImage
+    chmod +x arduino-ide.AppImage
+    sudo mv arduino-ide.AppImage /opt/arduino-ide.AppImage
+    sudo ln -s /opt/arduino-ide.AppImage /usr/local/bin/arduino-ide
+    echo "[*] Arduino IDE Installation abgeschlossen."
+    echo "Sie können die Arduino IDE nun mit 'arduino-ide' im Terminal starten."
+    sudo apt-get update
+    sudo apt-get install -y libfuse2
+
+    # Chromium-Browser installieren
+    echo "[*] Chromium-Browser installieren"
+    sudo apt install -y chromium-browser
+
+    # GUI Login
+    echo "[*] GUI-Login für Benutzer 'vagrant' aktivieren"
+    echo "vagrant:vagrant" | sudo chpasswd
+    echo "startxfce4" > /home/vagrant/.xsession
+    sudo chown vagrant:vagrant /home/vagrant/.xsession
+    chmod +x /home/vagrant/.xsession
+    sudo usermod -aG sudo vagrant
+    sudo usermod -aG video,audio,input vagrant
+    sudo systemctl set-default graphical.target
+    echo "[*] Tastatur auf Deutsch (GUI)"
+    echo "setxkbmap de" >> /home/vagrant/.xprofile
+    sudo chown vagrant:vagrant /home/vagrant/.xprofile
+
+
+    # Tastatur auf Deutsch setzen (X11 + Konsole)
+    echo "[*] Tastatur auf Deutsch (Konsole)"
+    sudo sed -i 's/XKBLAYOUT=.*/XKBLAYOUT="de"/' /etc/default/keyboard
+    sudo dpkg-reconfigure -f noninteractive keyboard-configuration
+    sudo service keyboard-setup restart
+
+
+    # Ros workspace einrichten
+    echo "[*] ROS 2 Workspace einrichten"
+    sudo -u vagrant mkdir -p /home/vagrant/ros2_workspace/src
+    sudo -u vagrant git clone https://github.com/dohren/self_driving_bot.git /home/vagrant/ros2_workspace/src/self_driving_bot
+    cd /home/vagrant/ros2_workspace
+    sudo -u vagrant bash -c "colcon build && source /opt/ros/jazzy/setup.bash"
+
+    echo "[*] ROS 2 Workspace Setup in .bashrc eintragen"
+    echo "source ~/ros2_workspace/install/setup.bash" >> /home/vagrant/.bashrc
+    chown vagrant:vagrant /home/vagrant/.bashrc
+
+
+    sudo apt-mark unhold grub-pc grub-pc-bin
+    # setxkbmap_de
+    echo "[*] Setup abgeschlossen. Du kannst die grafische Oberfläche über VirtualBox verwenden."
+    sudo reboot
+  SHELL
+
+
+end
+

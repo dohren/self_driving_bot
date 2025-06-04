@@ -5,19 +5,19 @@ controller_manager:
 
 diff_base_controller:
   ros__parameters:
-      left_wheel_names: ["left_wheel_joint"]
-      right_wheel_names: ["right_wheel_joint"]
+      left_wheel_names: ["front_left_wheel_joint"]
+      right_wheel_names: ["front_right_wheel_joint"]
       command_interfaces:
         - velocity
       # publish_rate: 50.0
       wheel_separation: 0.5
       wheel_radius: 0.15
       left_wheel:
-        joint: "left_wheel_joint"
+        joint: "left_front_wheel_joint"
         encoder_ticks_per_revolution: 1024  
         encoder_topic: "lwheel"  
       right_wheel:
-        joint: "right_wheel_joint"
+        joint: "right_front_wheel_joint"
         encoder_ticks_per_revolution: 1024  
         encoder_topic: "rwheel"  
       cmd_vel_timeout: 0.5
