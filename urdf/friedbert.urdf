@@ -26,7 +26,7 @@
     <visual>
       <origin xyz="0 0 0.025" rpy="0 0 3.14159"/>
         <geometry>
-            <mesh filename="file:///home/andi/project/ros2_workspace/src/self_driving_bot/meshes/torso.stl" scale="0.002 0.002 0.002"/>
+            <mesh filename="file://$(find self_driving_bot)/meshes/torso.stl" scale="0.002 0.002 0.002"/>
         </geometry>
       <material name="wood">
         <color rgba="0.6 0.4 0.2 1.0"/>
@@ -35,7 +35,7 @@
     <collision>
       <origin xyz="0 0 0.025" rpy="0 0 3.14159"/>
       <geometry>
-        <mesh filename="file:///home/andi/project/ros2_workspace/src/self_driving_bot/meshes/torso.stl" scale="0.002 0.002 0.002"/>
+        <mesh filename="file://$(find self_driving_bot)/meshes/torso.stl" scale="0.002 0.002 0.002"/>
       </geometry>
     </collision>
     <inertial>
@@ -194,7 +194,7 @@
     <visual>
       <origin xyz="0 0 0.0" rpy="0 0 3.14159"/>
       <geometry>
-        <mesh filename="file:///home/andi/project/ros2_workspace/src/self_driving_bot/meshes/left_upper_arm.stl" scale="0.002 0.002 0.002"/>
+        <mesh filename="file://$(find self_driving_bot)/meshes/left_upper_arm.stl" scale="0.002 0.002 0.002"/>
       </geometry>
       <material name="wood">
         <color rgba="0.6 0.4 0.2 1.0"/>
@@ -203,7 +203,7 @@
     <collision>
       <origin xyz="0 0 0.0" rpy="0 0 3.14159"/>
       <geometry>
-        <mesh filename="file:///home/andi/project/ros2_workspace/src/self_driving_bot/meshes/left_upper_arm.stl" scale="0.002 0.002 0.002"/>
+        <mesh filename="file://$(find self_driving_bot)/meshes/left_upper_arm.stl" scale="0.002 0.002 0.002"/>
       </geometry>
     </collision>
     <inertial>
@@ -226,7 +226,7 @@
     <visual>
       <origin xyz="0 0 0.0" rpy="0 0 3.14159"/>
       <geometry>
-        <mesh filename="file:///home/andi/project/ros2_workspace/src/self_driving_bot/meshes/left_lower_arm.stl" scale="0.002 0.002 0.002"/>
+        <mesh filename="file://$(find self_driving_bot)/meshes/left_lower_arm.stl" scale="0.002 0.002 0.002"/>
       </geometry>
       <material name="wood">
         <color rgba="0.6 0.4 0.2 1.0"/>
@@ -235,7 +235,7 @@
     <collision>
       <origin xyz="0 0 0.0" rpy="0 0 3.14159"/>
       <geometry>
-        <mesh filename="file:///home/andi/project/ros2_workspace/src/self_driving_bot/meshes/left_lower_arm.stl" scale="0.002 0.002 0.002"/>
+        <mesh filename="file://$(find self_driving_bot)/meshes/left_lower_arm.stl" scale="0.002 0.002 0.002"/>
       </geometry>
     </collision>
     <inertial>
@@ -259,7 +259,7 @@
     <visual>
       <origin xyz="0 0 0.0" rpy="0 0 3.14159"/>
       <geometry>
-        <mesh filename="file:///home/andi/project/ros2_workspace/src/self_driving_bot/meshes/right_upper_arm.stl" scale="0.002 0.002 0.002"/>
+        <mesh filename="file://$(find self_driving_bot)/meshes/right_upper_arm.stl" scale="0.002 0.002 0.002"/>
       </geometry>
       <material name="wood">
         <color rgba="0.6 0.4 0.2 1.0"/>
@@ -268,7 +268,7 @@
     <collision>
       <origin xyz="0 0 0.0" rpy="0 0 3.14159"/>
       <geometry>
-        <mesh filename="file:///home/andi/project/ros2_workspace/src/self_driving_bot/meshes/right_upper_arm.stl" scale="0.002 0.002 0.002"/>
+        <mesh filename="file://$(find self_driving_bot)/meshes/right_upper_arm.stl" scale="0.002 0.002 0.002"/>
       </geometry>
     </collision>
     <inertial>
@@ -291,7 +291,7 @@
     <visual>
       <origin xyz="0 0 0.0" rpy="0 0 3.14159"/>
       <geometry>
-        <mesh filename="file:///home/andi/project/ros2_workspace/src/self_driving_bot/meshes/right_lower_arm.stl" scale="0.002 0.002 0.002"/>
+        <mesh filename="file://$(find self_driving_bot)/meshes/right_lower_arm.stl" scale="0.002 0.002 0.002"/>
       </geometry>
       <material name="wood">
         <color rgba="0.6 0.4 0.2 1.0"/>
@@ -300,7 +300,7 @@
     <collision>
       <origin xyz="0 0 0.0" rpy="0 0 3.14159"/>
       <geometry>
-        <mesh filename="file:///home/andi/project/ros2_workspace/src/self_driving_bot/meshes/right_lower_arm.stl" scale="0.002 0.002 0.002"/>
+        <mesh filename="file://$(find self_driving_bot)/meshes/right_lower_arm.stl" scale="0.002 0.002 0.002"/>
       </geometry>
     </collision>
     <inertial>
@@ -324,7 +324,7 @@
     <visual>
       <origin xyz="0 0 0.0" rpy="0 0 3.14159"/>
       <geometry>
-        <mesh filename="file:///home/andi/project/ros2_workspace/src/self_driving_bot/meshes/neck.stl" scale="0.002 0.002 0.002"/>
+        <mesh filename="file://$(find self_driving_bot)/meshes/neck.stl" scale="0.002 0.002 0.002"/>
       </geometry>
       <material name="wood">
         <color rgba="0.6 0.4 0.2 1.0"/>
@@ -333,7 +333,7 @@
     <collision>
       <origin xyz="0 0 0.0" rpy="0 0 3.14159"/>
       <geometry>
-        <mesh filename="file:///home/andi/project/ros2_workspace/src/self_driving_bot/meshes/neck.stl" scale="0.002 0.002 0.002"/>
+        <mesh filename="file://$(find self_driving_bot)/meshes/neck.stl" scale="0.002 0.002 0.002"/>
       </geometry>
     </collision>
     <inertial>
@@ -357,7 +357,7 @@
     <visual>
       <origin xyz="0 0 0.0" rpy="0 0 3.14159"/>
       <geometry>
-        <mesh filename="file:///home/andi/project/ros2_workspace/src/self_driving_bot/meshes/head.stl" scale="0.002 0.002 0.002"/>
+        <mesh filename="file://$(find self_driving_bot)/meshes/head.stl" scale="0.002 0.002 0.002"/>
       </geometry>
       <material name="wood">
         <color rgba="0.6 0.4 0.2 1.0"/>
@@ -366,7 +366,7 @@
     <collision>
       <origin xyz="0 0 0.0" rpy="0 0 3.14159"/>
       <geometry>
-        <mesh filename="file:///home/andi/project/ros2_workspace/src/self_driving_bot/meshes/head.stl" scale="0.002 0.002 0.002"/>
+        <mesh filename="file://$(find self_driving_bot)/head.stl" scale="0.002 0.002 0.002"/>
       </geometry>
     </collision>
     <inertial>

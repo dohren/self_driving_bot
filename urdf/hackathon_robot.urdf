@@ -26,7 +26,7 @@
     <visual>
       <origin xyz="0 0 0.07" rpy="0 0 3.14159"/>
         <geometry>
-            <mesh filename="file:///home/andi/project/ros2_workspace/src/self_driving_bot/meshes/robot.stl" scale="0.002 0.002 0.002"/>
+            <mesh filename="file://$(find self_driving_bot)/meshes/robot.stl" scale="0.002 0.002 0.002"/>
         </geometry>
       <material name="wood">
         <color rgba="0.6 0.4 0.2 1.0"/>
@@ -35,7 +35,7 @@
     <collision>
       <origin xyz="0 0 0.07" rpy="0 0 3.14159"/>
       <geometry>
-        <mesh filename="file:///home/andi/project/ros2_workspace/src/self_driving_bot/meshes/robot.stl" scale="0.002 0.002 0.002"/>
+        <mesh filename="file://$(find self_driving_bot)/meshes/robot.stl" scale="0.002 0.002 0.002"/>
       </geometry>
     </collision>
     <inertial>
