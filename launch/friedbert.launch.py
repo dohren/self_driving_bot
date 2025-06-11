@@ -170,11 +170,15 @@ def generate_launch_description():
         on_shutdown=[
             OpaqueFunction(function=lambda _: os.remove(world_sdf))
         ]))
-
-    set_env_vars_resources = AppendEnvironmentVariable(
-            'GZ_SIM_RESOURCE_PATH',
-            os.path.join(sim_dir, 'worlds'))
     
+    set_env_vars_resources = AppendEnvironmentVariable(
+        'GZ_SIM_RESOURCE_PATH',
+        os.pathsep.join([
+            os.path.join(sim_dir, 'worlds'),
+            os.path.join(self_driving_dir)  # wichtig: dieser Pfad enthält die Meshes
+        ])
+    )
+        
     gazebo_client = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             os.path.join(get_package_share_directory('ros_gz_sim'),
