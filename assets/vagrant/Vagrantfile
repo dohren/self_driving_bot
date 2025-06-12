@@ -107,6 +107,19 @@ Vagrant.configure("2") do |config|
     sudo apt-get update
     sudo apt-get install -y libfuse2
 
+    # Arduino CLI installieren (falls noch nicht vorhanden)
+    if ! command -v arduino-cli &> /dev/null; then
+      curl -fsSL https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh | sh
+      mv ./bin/arduino-cli /usr/local/bin/
+    fi
+    arduino-cli config init
+    arduino-cli config add board_manager.additional_urls https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_index.json
+    arduino-cli core update-index
+    arduino-cli core install esp32:esp32
+    wget -q https://github.com/micro-ROS/micro_ros_arduino/archive/refs/tags/v2.0.7-iron.zip -O microros-v2.0.7-iron.zip
+
+
+
     # Chromium-Browser installieren
     echo "[*] Chromium-Browser installieren"
     sudo apt install -y chromium-browser
@@ -123,7 +136,7 @@ Vagrant.configure("2") do |config|
     echo "[*] Tastatur auf Deutsch (GUI)"
     echo "setxkbmap de" >> /home/vagrant/.xprofile
     sudo chown vagrant:vagrant /home/vagrant/.xprofile
-
+    # am Hostsystem sudo usermod -aG vboxusers $USER
 
     # Tastatur auf Deutsch setzen (X11 + Konsole)
     echo "[*] Tastatur auf Deutsch (Konsole)"

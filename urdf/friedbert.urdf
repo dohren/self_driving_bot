@@ -481,6 +481,55 @@
   </joint>
 
 
+  <gazebo reference="left_eye">
+    <sensor name="left_camera" type="camera">
+      <update_rate>30.0</update_rate>
+      <camera>
+        <horizontal_fov>1.39626</horizontal_fov> <!-- 80 Grad -->
+        <image>
+          <width>640</width>
+          <height>480</height>
+          <format>R8G8B8</format>
+        </image>
+        <clip>
+          <near>0.05</near>
+          <far>10</far>
+        </clip>
+      </camera>
+      <plugin name="gazebo_ros_camera_left" filename="libgazebo_ros_camera.so">
+        <camera_name>left</camera_name>
+        <frame_name>left_eye</frame_name>
+        <topic_name>image_raw</topic_name>
+        <camera_info_topic_name>camera_info</camera_info_topic_name>
+      </plugin>
+    </sensor>
+  </gazebo>
+
+  <gazebo reference="right_eye">
+    <sensor name="right_camera" type="camera">
+      <update_rate>30.0</update_rate>
+      <camera>
+        <horizontal_fov>1.39626</horizontal_fov> <!-- 80 Grad -->
+        <image>
+          <width>640</width>
+          <height>480</height>
+          <format>R8G8B8</format>
+        </image>
+        <clip>
+          <near>0.05</near>
+          <far>10</far>
+        </clip>
+      </camera>
+      <plugin name="gazebo_ros_camera_left" filename="libgazebo_ros_camera.so">
+        <camera_name>reight</camera_name>
+        <frame_name>reight_eye</frame_name>
+        <topic_name>image_raw</topic_name>
+        <camera_info_topic_name>camera_info</camera_info_topic_name>
+      </plugin>
+    </sensor>
+  </gazebo>
+
+
   <!-- Transmissions for ros2_control -->
   <transmission name="left_front_wheel_trans">
     <type>transmission_interface/SimpleTransmission</type>
