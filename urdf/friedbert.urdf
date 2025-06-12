@@ -430,43 +430,56 @@
     </plugin>
   </gazebo>
 
-  <!-- LIDAR -->
-  <gazebo reference="lidar_sensor">
-    <sensor name="rplidar" type="gpu_lidar">
-      <update_rate>10.0</update_rate>
-      <visualize>True</visualize>
-      <always_on>true</always_on>
-      <gz_frame_id>lidar_sensor</gz_frame_id>
-      <topic>scan</topic>
-      <lidar>
-        <scan>
-          <horizontal>
-            <samples>360</samples>
-            <resolution>1.0</resolution>
-            <min_angle>0.0</min_angle>
-            <max_angle>6.28</max_angle>
-          </horizontal>
-        </scan>
-        <range>
-          <min>0.6</min>
-          <max>20.0</max>
-          <resolution>0.01</resolution>
-        </range>
-      </lidar>
-    </sensor>
+  <!-- Left wheel -->
+  <link name="left_eye">
     <visual>
-      <material>
-        <diffuse>0.011764705882352941 0.011764705882352941 0.011764705882352941 1</diffuse>
-        <specular>0 0 0 1</specular>
-        <emissive>0 0 0 1</emissive>
+      <origin xyz="0 0 0" rpy="0 1.5708 0"/>
+      <geometry>
+        <cylinder radius="0.012" length="0.02"/>
+      </geometry>
+      <material name="black">
+        <color rgba="0 0 0 1"/>
       </material>
     </visual>
-  </gazebo>
+    <collision>
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+      <geometry>
+        <cylinder radius="0.01" length="0.02"/>
+      </geometry>
+    </collision>
+  </link>
 
-  <!-- Gazebo plugin to preserve front_ball_joint -->
-  <gazebo reference="front_ball_joint">
-    <preserveFixedJoint>true</preserveFixedJoint>
-  </gazebo>
+  <joint name="left_eye_joint" type="fixed">
+    <parent link="head"/>
+    <child link="left_eye"/>
+    <origin xyz="0.07 0.05 0.04" rpy="0 0 0"/>
+  </joint>
+
+  <!-- Left wheel -->
+  <link name="right_eye">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 1.5708 0"/>
+      <geometry>
+        <cylinder radius="0.012" length="0.02"/>
+      </geometry>
+      <material name="black">
+        <color rgba="0 0 0 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+      <geometry>
+        <cylinder radius="0.01" length="0.02"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="right_eye_joint" type="fixed">
+    <parent link="head"/>
+    <child link="right_eye"/>
+    <origin xyz="0.07 -0.05 0.04" rpy="0 0 0"/>
+  </joint>
+
 
   <!-- Transmissions for ros2_control -->
   <transmission name="left_front_wheel_trans">
