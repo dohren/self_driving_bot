@@ -18,7 +18,8 @@ setup(
         (os.path.join('share', package_name, 'rviz'), glob('rviz/*')),
         (os.path.join('share', package_name, 'params'), glob('params/*')),
         (os.path.join('share', package_name, 'maps'), glob('maps/*')),
-        (os.path.join('share', package_name, 'config'), glob('config/*'))
+        (os.path.join('share', package_name, 'config'), glob('config/*')),
+        (os.path.join('share', package_name, 'worlds'), glob('worlds/*'))
     ],
     install_requires=['setuptools'],
     zip_safe=True,
@@ -31,7 +32,8 @@ setup(
         'console_scripts': [
             "gamepad = self_driving_bot.gamepad_publisher:main",
             "diff_tf = self_driving_bot.diff_tf:main",
-            "diff_tf_box = self_driving_bot.diff_tf_box:main"
+            "diff_tf_box = self_driving_bot.diff_tf_box:main",
+            "cmd_vel_transform = self_driving_bot.cmd_vel_transform:main"
         ],
     },
 )
