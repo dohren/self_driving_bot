@@ -74,7 +74,11 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
+<<<<<<< Updated upstream
         <cylinder radius="0.07" length="0.05"/>
+=======
+        <cylinder radius="0.035" length="0.02"/>
+>>>>>>> Stashed changes
       </geometry>
       <material name="black">
         <color rgba="0 0 0 1.0"/>
@@ -93,6 +97,7 @@
     </inertial>
   </link>
 
+<<<<<<< Updated upstream
  <!-- Right wheel -->
   <link name="right_front_wheel">
     <visual>
@@ -116,28 +121,42 @@
       <inertia ixx="0.00001" ixy="0" ixz="0" iyy="0.00001" iyz="0" izz="0.00001"/> <!-- Schätze die Trägheitswerte -->
     </inertial>
   </link>
+=======
+>>>>>>> Stashed changes
 
-  <!-- Left wheel -->
-  <link name="left_front_wheel">
+  <!-- Front ball -->
+  <link name="front_ball">
     <visual>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <origin xyz="0 0 0"/>
       <geometry>
+<<<<<<< Updated upstream
         <cylinder radius="0.07" length="0.05"/>
+=======
+        <sphere radius="0.015"/>
+>>>>>>> Stashed changes
       </geometry>
-      <material name="black">
-        <color rgba="0 0 0 1.0"/>
+      <material name="white">
+        <color rgba="1 1 1 1.0"/>
       </material>
     </visual>
     <collision>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <origin xyz="0 0 0"/>
       <geometry>
+<<<<<<< Updated upstream
         <cylinder radius="0.032" length="0.05"/>
+=======
+        <sphere radius="0.015"/>
+>>>>>>> Stashed changes
       </geometry>
     </collision>
     <inertial>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <mass value="0.05"/> <!-- Setze die Masse der Kugel -->
+<<<<<<< Updated upstream
       <inertia ixx="0.00001" ixy="0" ixz="0" iyy="0.00001" iyz="0" izz="0.00001"/> <!-- Schätze die Trägheitswerte -->
+=======
+      <inertia ixx="0.00005" ixy="0" ixz="0" iyy="0.00005" iyz="0" izz="0.00005"/> <!-- Schätze die Trägheitswerte -->
+>>>>>>> Stashed changes
     </inertial>
   </link>
 
@@ -156,8 +175,9 @@
     <axis xyz="0 0 -1"/>
   </joint>
 
-  <joint name="right_front_wheel_joint" type="continuous">
+  <joint name="front_ball_joint" type="fixed">
     <parent link="base_link"/>
+<<<<<<< Updated upstream
     <child link="right_front_wheel"/>
     <origin xyz="0.12 -0.111 0.065" rpy="1.5708 0 0"/>
     <axis xyz="0 0 -1"/>
@@ -178,6 +198,15 @@
     <axis xyz="0 0 -1"/>
     <dynamics damping="0.0" friction="0.0"/> <!-- ✨ Wichtige Ergänzung -->
     <limit lower="-3.14" upper="3.14" effort="0.0" velocity="100.0"/>
+=======
+    <child link="front_ball"/>
+    <origin xyz="0.09 0 0.01" rpy="0 0 0"/>
+  </joint>
+
+
+  <joint name="left_front_wheel_joint" type="continuous">
+
+>>>>>>> Stashed changes
   </joint>
 
   <gazebo reference="left_front_wheel">
@@ -191,6 +220,12 @@
   <!-- Gazebo joint_state_publisher plugin -->
   <gazebo>
     <plugin filename="gz-sim-joint-state-publisher-system" name="gz::sim::systems::JointStatePublisher">
+<<<<<<< Updated upstream
+=======
+      <joint_name>right_wheel_joint</joint_name>
+      <joint_name>left_wheel_joint</joint_name>
+      <joint_name>front_ball_joint</joint_name>
+>>>>>>> Stashed changes
       <topic>joint_states</topic>
       <update_rate>30</update_rate>
     </plugin>

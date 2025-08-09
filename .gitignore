@@ -1,3 +1,6 @@
 .vscode
 .pio
 .vagrant
+log/
+build/
+install/
