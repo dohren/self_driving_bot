@@ -62,6 +62,7 @@ def generate_launch_description():
     declare_robot_name_cmd = DeclareLaunchArgument('robot_name', default_value='nav2_turtlebot4', description='Robot name')
     declare_robot_sdf_cmd = DeclareLaunchArgument('robot_sdf', default_value=os.path.join(self_driving_dir, 'urdf', 'ikea_table.urdf'), description='Robot sdf file')
 
+    robot_controllers = os.path.join(self_driving_dir, 'config', 'controllers.yaml')
     # Nodes
 
     start_robot_state_publisher_cmd = Node(
@@ -86,9 +87,29 @@ def generate_launch_description():
     joint_state_broadcaster_spawner = Node(
         package='controller_manager',
         executable='spawner',
-        arguments=['joint_state_broadcaster'],
+        arguments=[
+            'joint_state_broadcaster',
+               "-c", "/controller_manager",
+               "--controller-manager-timeout", "20",
+               "--switch-timeout", "20"
+        ],
+        output='screen'
     )
-    
+
+    diff_drive_base_controller_spawner = Node(
+        package="controller_manager",
+        executable="spawner",
+        arguments=[
+            "diff_drive_base_controller",
+            "-c", "/controller_manager",
+            "--controller-manager-timeout", "20",
+            "--switch-timeout", "20"
+        ],
+        output="screen",
+    )
+
+
+
     rviz_cmd = Node(
         package='rviz2',
         executable='rviz2',
@@ -164,8 +185,9 @@ def generate_launch_description():
 
     # Add ros2_control_node and robot_state_publisher
     ld.add_action(start_robot_state_publisher_cmd)
-    ld.add_action(ros2_control_node)
+    #ld.add_action(ros2_control_node)
     ld.add_action(joint_state_broadcaster_spawner)
+    ld.add_action(diff_drive_base_controller_spawner)
 
     # RViz zuletzt starten
     #ld.add_action(rviz_cmd)

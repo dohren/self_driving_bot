@@ -1,0 +1,24 @@
+/**/controller_manager:
+  ros__parameters:
+    update_rate: 100
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+
+/**/diff_drive_base_controller:
+  ros__parameters:
+    type: diff_drive_controller/DiffDriveController
+    left_wheel_names:  ["wheel_back_left_joint"]
+    right_wheel_names: ["wheel_back_right_joint"]
+
+    wheel_separation: 0.5
+    wheel_radius: 0.15
+
+    publish_rate: 50.0
+    cmd_vel_timeout: 0.5
+    enable_odom_tf: true
+    odom_frame_id: odom
+    base_frame_id: base_link
+
+    # Du hast nur velocity-States:
+    position_feedback: false
+

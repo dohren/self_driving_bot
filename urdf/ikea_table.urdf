@@ -16,13 +16,13 @@
    <visual>
       <origin rpy="0.0 0.0 -1.57" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="file:///home/andi/ros2_workspace/install/self_driving_bot/share/self_driving_bot/meshes/ikea_table.dae" scale="1 1 1"/>
+        <mesh filename="file:///home/andi/project/ros2_workspace/install/self_driving_bot/share/self_driving_bot/meshes/ikea_table.dae" scale="1 1 1"/>
       </geometry>
     </visual>
     <collision>
       <origin rpy="0.0 0.0 -1.57" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="file:///home/andi/ros2_workspace/install/self_driving_bot/share/self_driving_bot/meshes/ikea_table.dae" scale="1 1 1"/>
+        <mesh filename="file:///home/andi/project/ros2_workspace/install/self_driving_bot/share/self_driving_bot/meshes/ikea_table.dae" scale="1 1 1"/>
      </geometry>
     </collision>
     <inertial>
@@ -175,12 +175,12 @@
    <visual>
       <origin rpy="0.0 0.0 0.0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="file:///home/andi/ros2_workspace/install/self_driving_bot/share/self_driving_bot/meshes/roll.dae" scale="1 1 1"/>
+        <mesh filename="file:///home/andi/project/ros2_workspace/install/self_driving_bot/share/self_driving_bot/meshes/roll.dae" scale="1 1 1"/>
       </geometry>
     </visual>
     <collision>
       <geometry>
-        <mesh filename="file:///home/andi/ros2_workspace/install/self_driving_bot/share/self_driving_bot/meshes/roll.dae" scale="1 1 1"/>
+        <mesh filename="file:///home/andi/project/ros2_workspace/install/self_driving_bot/share/self_driving_bot/meshes/roll.dae" scale="1 1 1"/>
      </geometry>
     </collision>
     <inertial>
@@ -242,12 +242,12 @@
    <visual>
       <origin rpy="0.0 0.0 0.0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="file:///home/andi/ros2_workspace/install/self_driving_bot/share/self_driving_bot/meshes/roll.dae" scale="1 1 1"/>
+        <mesh filename="file:///home/andi/project/ros2_workspace/install/self_driving_bot/share/self_driving_bot/meshes/roll.dae" scale="1 1 1"/>
       </geometry>
     </visual>
     <collision>
       <geometry>
-        <mesh filename="file:///home/andi/ros2_workspace/install/self_driving_bot/share/self_driving_bot/meshes/roll.dae" scale="1 1 1"/>
+        <mesh filename="file:///home/andi/project/ros2_workspace/install/self_driving_bot/share/self_driving_bot/meshes/roll.dae" scale="1 1 1"/>
      </geometry>
     </collision>
     <inertial>
@@ -374,16 +374,25 @@
    <!-- DIFFENERNTIAL DRIVE-->
 
 
-  <ros2_control name="RobotController" type="system">
+  <ros2_control name="GazeboSimSystem" type="system">
     <hardware>
       <plugin>gz_ros2_control/GazeboSimSystem</plugin>
     </hardware>
+
     <joint name="wheel_back_left_joint">
-      <command_interface name="velocity"/>
+      <!-- etwas großzügigere Limits, sonst kappst du bei ~1 rad/s -->
+      <command_interface name="velocity">
+        <param name="min">-10</param>
+        <param name="max">10</param>
+      </command_interface>
       <state_interface name="velocity"/>
     </joint>
+
     <joint name="wheel_back_right_joint">
-      <command_interface name="velocity"/>
+      <command_interface name="velocity">
+        <param name="min">-10</param>
+        <param name="max">10</param>
+      </command_interface>
       <state_interface name="velocity"/>
     </joint>
   </ros2_control>
@@ -392,9 +401,10 @@
   <gazebo>
     <!-- Joint state publisher -->
     <plugin filename="gz_ros2_control-system" name="gz_ros2_control::GazeboSimROS2ControlPlugin">
-      <parameters>/home/andi/ros2_workspace/install/self_driving_bot/share/self_driving_bot/params/self_driving_bot_params.yaml</parameters>
+      <parameters>/home/andi/project/ros2_workspace/install/self_driving_bot/share/self_driving_bot/config/controllers.yaml</parameters>
     </plugin>
   </gazebo>
+  
   
    <!-- CAMERA-->
   <gazebo reference="camera_joint">
