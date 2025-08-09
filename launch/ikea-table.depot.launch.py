@@ -19,13 +19,14 @@ import tempfile
 from launch.actions import TimerAction
 from pathlib import Path
 
+# ros2 run teleop_twist_keyboard teleop_twist_keyboard   --ros-args -p stamped:=true -p frame_id:=base_link   -r cmd_vel:=/diff_drive_base_controller/cmd_vel
 
 def generate_launch_description():
     # Directories and files
     sim_dir = get_package_share_directory('nav2_minimal_tb4_sim')
     self_driving_dir = get_package_share_directory('self_driving_bot')
     urdf_file = os.path.join(self_driving_dir, 'urdf', 'ikea_table.urdf')
-    servo_controller_config = os.path.join(self_driving_dir, 'config', 'servo_controllers.yaml')
+    servo_controller_config = os.path.join(self_driving_dir, 'config', 'controllers.yaml')
 
     # Launch configurations
     namespace = LaunchConfiguration('namespace')
