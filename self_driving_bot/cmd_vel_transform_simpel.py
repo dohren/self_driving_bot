@@ -5,7 +5,7 @@ from geometry_msgs.msg import Twist
 import time
 
 # --- deine bisherigen Werte ---
-TURN_THRESHOLD = 0.1
+TURN_THRESHOLD = 0.03
 DRIVE_THRESHOLD = 0.05
 
 DRIVE_SPEED = 0.45
