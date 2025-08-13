@@ -213,7 +213,7 @@ def generate_launch_description():
     ld.add_action(filter_scan)
     #ld.add_action(start_gamepad_controller_cmd)
     ld.add_action(start_odometry_publisher_cmd)  
-    #ld.add_action(start_cmd_vel_transform)  
+    ld.add_action(start_cmd_vel_transform)  
 
     # Nav2 + RViz
     ld.add_action(rviz_cmd)
