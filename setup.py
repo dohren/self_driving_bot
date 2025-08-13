@@ -33,7 +33,9 @@ setup(
             "gamepad = self_driving_bot.gamepad_publisher:main",
             "diff_tf = self_driving_bot.diff_tf:main",
             "diff_tf_box = self_driving_bot.diff_tf_box:main",
-            "cmd_vel_transform = self_driving_bot.cmd_vel_transform:main"
+            "cmd_vel_transform = self_driving_bot.cmd_vel_transform:main",
+            "cmd_vel_transform_simpel = self_driving_bot.cmd_vel_transform_simpel:main"
+
         ],
     },
 )

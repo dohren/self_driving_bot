@@ -12,22 +12,24 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""This is all-in-one launch script intended for use by nav2 developers."""
+"""All-in-one Nav2 launch with URDF/Xacro loading via robot_state_publisher."""
 
 import os
 
 from ament_index_python.packages import get_package_share_directory
 
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument, ExecuteProcess, IncludeLaunchDescription
+from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription
 from launch.conditions import IfCondition
 from launch.launch_description_sources import PythonLaunchDescriptionSource
-from launch.substitutions import LaunchConfiguration, PythonExpression
+from launch.substitutions import LaunchConfiguration, Command
 from launch_ros.actions import Node
+from launch_ros.parameter_descriptions import ParameterValue
+from pathlib import Path
 
 
 def generate_launch_description():
-    # Get the launch directory
+    # Directories
     bringup_dir = get_package_share_directory('nav2_bringup')
     launch_dir = os.path.join(bringup_dir, 'launch')
 
@@ -43,10 +45,12 @@ def generate_launch_description():
     autostart = LaunchConfiguration('autostart')
     use_composition = LaunchConfiguration('use_composition')
     use_respawn = LaunchConfiguration('use_respawn')
+    urdf_file = os.path.join(self_driving_bot_dir, 'urdf', 'ikea_table.urdf')
 
     # Launch configuration variables specific to simulation
     rviz_config_file = LaunchConfiguration('rviz_config_file')
     use_rviz = LaunchConfiguration('use_rviz')
+
     #robot_sdf = LaunchConfiguration('robot_sdf')
 
     # Map fully qualified names to relative ones so the node's namespace can be prepended.
@@ -74,7 +78,7 @@ def generate_launch_description():
 
     declare_map_yaml_cmd = DeclareLaunchArgument(
         'map',
-        default_value=os.path.join(self_driving_bot_dir, 'maps', 'lumabit_buero.yaml'), #'Wohnung1.yaml'),
+        default_value=os.path.join(self_driving_bot_dir, 'maps', 'lumabit_buero.yaml'),
         description='Full path to map file to load')
 
     declare_use_sim_time_cmd = DeclareLaunchArgument(
@@ -110,23 +114,15 @@ def generate_launch_description():
         default_value='True',
         description='Whether to start RVIZ')
 
-    declare_world_cmd = DeclareLaunchArgument(
-        'world',
-        # TODO(orduno) Switch back once ROS argument passing has been fixed upstream
-        #              https://github.com/ROBOTIS-GIT/turtlebot3_simulations/issues/91
-        # default_value=os.path.join(get_package_share_directory('turtlebot3_gazebo'),
-        # worlds/turtlebot3_worlds/waffle.model')
-        default_value=get_package_share_directory("self_driving_bot") + '/worlds/cafe.world',
-        description='Full path to world model file to load')
+    # New: URDF/Xacro argument (defaults to a xacro inside your package)
+    declare_urdf_path_cmd = DeclareLaunchArgument(
+        'urdf_path',
+        default_value=os.path.join(self_driving_bot_dir, 'urdf', 'ikea_table.urdf'),
+        description='Path to your robot URDF or Xacro file')
 
-    declare_robot_name_cmd = DeclareLaunchArgument(
-        'robot_name',
-        default_value='turtlebot3_waffle',
-        description='name of the robot')
-
+    # RViz
     rviz_cmd = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(
-            os.path.join(launch_dir, 'rviz_launch.py')),
+        PythonLaunchDescriptionSource(os.path.join(launch_dir, 'rviz_launch.py')),
         condition=IfCondition(use_rviz),
         launch_arguments={'namespace': namespace,
                           'use_namespace': use_namespace,
@@ -152,11 +148,11 @@ def generate_launch_description():
             output='screen')
 
 
-    start_odometry_publisher_cmd = Node(package='self_driving_bot',
-                    executable='diff_tf',
-                    name='diff_tf',
-                    )
-
+    start_cmd_vel_transform = Node(package='self_driving_bot',
+                executable='cmd_vel_transform_simpel',
+                name='cmd_vel_transform_simpel',
+                )    
+    
     filter_scan = Node(
       package='laser_filters',
       executable='scan_to_scan_filter_chain',
@@ -165,33 +161,37 @@ def generate_launch_description():
       parameters=[params_file]
     )
 
-    static_laser_tf = Node(
-        package='tf2_ros',
-        executable='static_transform_publisher',
-        name='static_laser_tf',
-        arguments=['0.2', '0.0', '0.15', '0', '0', '0', 'base_link', 'base_laser']
+    # Odometry publisher from your package (unchanged)
+    start_odometry_publisher_cmd = Node(
+        package='self_driving_bot',
+        executable='diff_tf',
+        name='diff_tf',
+        output='screen'
     )
 
 
-    static_footprint_tf = Node(
-        package='tf2_ros',
-        executable='static_transform_publisher',
-        name='static_footprint_tf',
-        arguments=['0', '0', '0.05', '0', '0', '0', 'base_footprint', 'base_link']
+    robot_state_publisher_node = Node(
+        package='robot_state_publisher',
+        executable='robot_state_publisher',
+        name='robot_state_publisher',
+        output='screen',
+        parameters=[{'use_sim_time': use_sim_time,
+                     'robot_description': Path(urdf_file).read_text()}], 
     )
 
-    static_transform_publisher_cmd = Node(
-        package='tf2_ros',
-        executable='static_transform_publisher',
-        name='static_transform_publisher',
-        arguments=['0', '0', '0', '0', '0', '0', '1', 'map', 'odom']
+    # (Optional) joint_state_publisher if you have non-driven joints and no hardware
+    joint_state_publisher_node = Node(
+        package='joint_state_publisher',
+        executable='joint_state_publisher',
+        name='joint_state_publisher',
+        output='screen',
+        condition=IfCondition(use_sim_time)  # enable typically for sim
     )
 
-
-    # Create the launch description and populate
+    # Build the LaunchDescription
     ld = LaunchDescription()
 
-    # Declare the launch options
+    # Declare args
     ld.add_action(declare_namespace_cmd)
     ld.add_action(declare_use_namespace_cmd)
     ld.add_action(declare_slam_cmd)
@@ -200,25 +200,23 @@ def generate_launch_description():
     ld.add_action(declare_params_file_cmd)
     ld.add_action(declare_autostart_cmd)
     ld.add_action(declare_use_composition_cmd)
-
-    ld.add_action(static_laser_tf)
-    ld.add_action(filter_scan)
-    ld.add_action(static_footprint_tf)
-
-
     ld.add_action(declare_rviz_config_file_cmd)
     ld.add_action(declare_use_rviz_cmd)
-    ld.add_action(declare_world_cmd)
-    ld.add_action(declare_robot_name_cmd)
     ld.add_action(declare_use_respawn_cmd)
+    ld.add_action(declare_urdf_path_cmd)
 
+    # Nodes
+    ld.add_action(robot_state_publisher_node)
+    ld.add_action(joint_state_publisher_node)
+
+
+    ld.add_action(filter_scan)
     #ld.add_action(start_gamepad_controller_cmd)
     ld.add_action(start_odometry_publisher_cmd)  
+    #ld.add_action(start_cmd_vel_transform)  
 
-    # Add the actions to launch all of the navigation nodes
+    # Nav2 + RViz
     ld.add_action(rviz_cmd)
     ld.add_action(bringup_cmd)
-
-
 
     return ld
