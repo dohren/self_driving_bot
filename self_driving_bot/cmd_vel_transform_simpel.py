@@ -9,7 +9,7 @@ TURN_THRESHOLD = 0.03
 DRIVE_THRESHOLD = 0.05
 
 DRIVE_SPEED = 0.45
-TURN_SPEED  = 0.6
+TURN_SPEED  = 0.7
 
 BOOST_AMOUNT = 0.2     # Zusatzgeschwindigkeit beim Start
 BOOST_TIME   = 0.3     # Dauer in Sekunden
