@@ -1,0 +1,27 @@
+fenster:
+  header:
+    stamp:
+      sec: 1770310307
+      nanosec: 313395266
+    frame_id: map
+  point:
+    x: 2.8929080963134766
+    y: 18.764707565307617
+    z: 0.002471923828125
+
+
+
+tuer:
+  header:
+    stamp:
+      sec: 1770308501
+      nanosec: 69993420
+    frame_id: map
+  point:
+    x: 4.163628578186035
+    y: 16.125455856323242
+    z: -0.001434326171875
+
+
+
+# ros2 topic echo /clicked_point
